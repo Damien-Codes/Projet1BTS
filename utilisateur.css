@@ -1,0 +1,93 @@
+
+body, h1, h2, h3, p, ul, li, table, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles pour le titre de la page */
+header {
+    background-color: #3485bb;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+table, th, td {
+    border: 2px solid #ddd;
+}
+
+th {
+    background-color: #3485bb;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+nav a.active {
+    
+    background-color: #666;
+}
+.lastth {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dbdbdb; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    text-decoration: none; /* Supprime les soulignements de texte par défaut pour les liens */
+    border: none; /* Supprime la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur de type main */
+    transition: background-color 0.3s ease; /* Transition en douceur pour la couleur de fond */
+    border: 2px solid black;
+  
+    /* Ajoutez d'autres styles personnalisés selon vos besoins */
+  }
+  
+  .lastth:hover {
+    background-color: #dbdbdb; /* Couleur de fond au survol */
+  }
+footer {
+    text-align: center;
+    background-color: #3485bb;
+    color: #fff;
+    padding: 1rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+

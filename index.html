@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Accueil</title>
+    <title>Agence de Locations d'Appartement</title>
 </head>
 <body>
-    <a href="connexion.php">Se connecter</a>
+    <header>
+        <h1>Agence de Locations d'Appartement</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Appartements</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="connexion.php">Se connecter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Des appartements confortables à louer</h2>
+        <p>Découvrez notre sélection d'appartements de qualité dans les meilleures localités.</p>
+        <a href="#" class="btn-primary">Voir les appartements</a>
+    </section>
+
+    <section class="apartments">
+        <h2>Nos Appartements</h2>
+        <div class="apartment">
+            <img src="appartement1.jpg" alt="Appartement 1">
+            <h3>Appartement 1</h3>
+            <p>Spacieux appartement avec vue panoramique.</p>
+            <span class="price">Prix : $1500/mois</span>
+            <a href="#" class="btn-secondary">En savoir plus</a>
+        </div>
+        <div class="apartment">
+            <img src="appartement2.jpg" alt="Appartement 2">
+            <h3>Appartement 2</h3>
+            <p>Appartement moderne en plein centre-ville.</p>
+            <span class="price">Prix : $1200/mois</span>
+            <a href="#" class="btn-secondary">En savoir plus</a>
+        </div>
+    </section>
 </body>
 </html>

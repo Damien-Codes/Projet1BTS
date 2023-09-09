@@ -1,37 +1,69 @@
-body{
+/* Styles pour le formulaire de connexion */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
-div {
-    border: 2px solid black;
-    border-radius: 21px;
-    padding: 5vh;
-    width: 548px;
-    height: 151px;
-    margin-top: 75px;
-    box-shadow: 4px 4px 4px #aaa;
-}
+
 a {
     text-decoration: none;
+    color: #333;
+    font-weight: bold;
     margin-top: 10px;
-    color: black;
+    display: block;
 }
-.style1 {
-    border:1px solid black;
-    border-radius: 8px;
-    margin-top: 8px;
-    
+
+h1 {
+    font-size: 2rem;
+    margin-top: 20px;
 }
-.style2 {
-    border: 1px solid black;
-    border-radius: 6px;
-    margin-top: 6px;
-    background-color: transparent;
-    width: 120px;
-    height: 30px;
-    margin-top:12px;
+
+form {
+    background-color: #fff;
+    max-width: 740px;
+    max-height: 588px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    padding: 31px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.style2:hover {
-    background-color: black;
-    color: white;
+
+form div {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input.style1,
+select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input.style2 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+input.style2:hover {
+    background-color: #666;
 }

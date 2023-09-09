@@ -22,12 +22,14 @@ session_start();
         <!-- Champs du formulaire mot de passe -->
         Saisir un mot de passe :<input type="password" name="mdp" class="style1"><br>
         <!-- Champs du formulaire type de compte -->
-        Choisir le type de compte : 
-        <label for="">
-        <option value="Admin">Admin</option>
-        <option value="Vacancier">Vacancier</option>
-        <option value="Location">Gestionnaire de Location</option>
-        </label> <br>
+        
+        <label for="type"></label>
+
+        <select id="cars">
+            <option value="adm">Admin</option>
+            <option value="vac">Vacancier</option>
+            <option value="ges">gestionnaire</option>
+        </select> <br>
         <!-- Bouton qui envoie les information a la bdd -->
         <input type="submit" value="Connexion" class="style2">
         <!-- Bouton qui enlève toutes les information du formulaire -->
@@ -38,7 +40,6 @@ session_start();
 
 <?php
 
-// Inclure le fichier de connexion à la base de données
 include("bdd.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -46,9 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $a = $_POST["user"];
     $b = $_POST["mdp"];
 
+
     // Utilisation de mysqli_real_escape_string pour échapper les données (attention, ce n'est pas aussi sûr que les requêtes préparées)
     $a = mysqli_real_escape_string($idc, $a);
     $b = mysqli_real_escape_string($idc, $b);
+
 
     // Requête SQL
     $requete = "SELECT * FROM compte WHERE user = '$a' AND mdp = '$b'";
@@ -59,7 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // La connexion est réussie
         $_SESSION["user"] = $a;
         $_SESSION["mdp"] = $b;
-        header("location:index.html");
+
+        header("location:admin.html");
         exit();
     } else {
         // La connexion a échoué
