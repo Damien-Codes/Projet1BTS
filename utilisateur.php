@@ -14,7 +14,7 @@
                 <li><a href="admin.html">Accueil</a></li>
                 <li><a href="#">Appartements</a></li>
                 <li><a href="utilisateur.php">Utilisateurs</a></li>
-                <li><a href="deconnxion.php">Déconnexion</a></li>
+                <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>

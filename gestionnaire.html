@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="gestionnaire.css">
     <title>Tableau de bord - Gestionnaire</title>
 </head>
 <body>
@@ -11,17 +11,47 @@
         <h1>Tableau de bord - Gestionnaire</h1>
         <nav>
             <ul>
-                <li><a href="gestionnaire.html">Accueil</a></li>
-                <li><a href="#">Appartements</a></li>
-                <li><a href="utilisateur.php">Utilisateurs</a></li>
-                <li><a href="#">Déconnexion</a></li>
+                <li><a href="gestionnaire.php">Accueil</a></li>
+                <li><a href="ajouthebergement.php">Hébergements</a></li>
+                <li><a href="#">Événements</a></li>
+                <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
-    <iframe src="" frameborder="0"></iframe>
+
+    <section class="formulaire">
+        <h2>Ajouter un Hébergement</h2>
+        <form action="traitement_hebergement.php" method="post">
+            <!-- Les champs pour l'ajout d'un hébergement vont ici -->
+            <input type="submit" value="Ajouter Hébergement" class="style2">
+        </form>
+    </section>
+    <div class="carte">
+        <img src="photo.jpg" alt="Hébergement Photo">
+        <h2 class="nomheb">Nom de l'hébergement</h2>
+        <p class="noheb">NoHEB: 12345</p>
+        <p class="codetypeheb">CodeTypeHEB: 5678</p>
+        <p class="nbplaceheb">Nombre de places: 4</p>
+        <p class="surfaceheb">Surface: 50 m²</p>
+        <p class="internet">Internet: Oui</p>
+        <p class="anneeheb">Année de construction: 2020</p>
+        <p class="secteurheb">Secteur: Montagne</p>
+        <p class="orientationheb">Orientation: Sud</p>
+        <p class="etatheb">État: Bon</p>
+        <p class="descriheb">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p class="tarifsemheb">Tarif par semaine: $500</p>
+    </div>
+    <section class="formulaire">
+        <h2>Ajouter un Événement</h2>
+        <form action="traitement_evenement.php" method="post">
+            <!-- Les champs pour l'ajout d'un événement vont ici -->
+            <input type="submit" value="Ajouter Événement" class="style2">
+        </form>
+    </section>
 
     <footer>
         <p>&copy; 2023 Agence de Locations d'Appartement</p>
     </footer>
 </body>
 </html>
+

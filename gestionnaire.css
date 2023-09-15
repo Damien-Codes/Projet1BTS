@@ -2,8 +2,10 @@ body, h1, h2, h3, p, ul, li, form, label, input, select, footer {
     margin: 0;
     padding: 0;
 }
+
+/* Styles pour l'en-tête */
 header {
-    background-color: #3485bb;
+    background-color: #333;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
@@ -27,12 +29,9 @@ nav a {
     text-decoration: none;
     font-weight: bold;
 }
-.titre {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 1.5rem;
-}
-form {
+
+/* Styles pour le conteneur des formulaires */
+.container {
     width: 80%;
     max-width: 400px;
     margin: 20px auto;
@@ -41,9 +40,19 @@ form {
     border-radius: 5px;
 }
 
+.container h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 label {
-    display: block;
-    font-weight: bold;
     margin-bottom: 5px;
 }
 
@@ -52,7 +61,6 @@ input[type="password"],
 input[type="email"],
 input[type="date"],
 select {
-    width: 90%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -65,7 +73,7 @@ select {
 
 input[type="submit"],
 input[type="reset"] {
-    background-color: #3485bb;
+    background-color: #333;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -73,9 +81,38 @@ input[type="reset"] {
     cursor: pointer;
 }
 
+/* Style pour le pied de page */
 footer {
     text-align: center;
-    background-color: #3485bb;
+    background-color: #333;
     color: #fff;
     padding: 1rem 0;
+}
+.carte {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.carte img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.carte h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.carte p {
+    margin: 5px 0;
+}
+
+/* Style pour les éléments spécifiques */
+.noheb, .codetypeheb, .nbplaceheb, .surfaceheb, .internet, .anneeheb, .secteurheb, .orientationheb, .etatheb, .descriheb, .tarifsemheb {
+    font-weight: bold;
 }
