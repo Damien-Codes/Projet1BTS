@@ -71,48 +71,50 @@ select {
     height: 40px;
 }
 
-input[type="submit"],
-input[type="reset"] {
+
+.carte {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 5px;
+}
+h3{
     background-color: #333;
     color: #fff;
-    border: none;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
+    text-align: center;
+}
+h3 a{
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.carte img {
+    max-width: 100%;
+    height: auto;
 }
 
+.nomheb {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Style pour les éléments spécifiques */
+.noheb, .codetypeheb, .nbplaceheb, .surfaceheb, .internet, .anneeheb, .secteurheb, .orientationheb, .etatheb, .descriheb, .tarifsemheb {
+    font-weight: bold;
+}
 /* Style pour le pied de page */
 footer {
     text-align: center;
     background-color: #333;
     color: #fff;
     padding: 1rem 0;
-}
-.carte {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 20px;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.carte img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.carte h2 {
-    font-size: 1.5rem;
-    margin-top: 10px;
-}
-
-.carte p {
-    margin: 5px 0;
-}
-
-/* Style pour les éléments spécifiques */
-.noheb, .codetypeheb, .nbplaceheb, .surfaceheb, .internet, .anneeheb, .secteurheb, .orientationheb, .etatheb, .descriheb, .tarifsemheb {
-    font-weight: bold;
 }

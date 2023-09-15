@@ -69,10 +69,10 @@
         $tel = $_POST["tel"];
         $port = $_POST["port"];
         // Vérifier si l'utilisateur existe déjà
-    $verifie = "SELECT * FROM compte WHERE USER = '$user'";
-    $verifieResult = mysqli_query($idc, $verifie);
+        $requete = "SELECT * FROM compte WHERE USER = '$user'";
+        $result = mysqli_query($idc, $requete);
     
-    if (mysqli_num_rows($verifieResult) > 0) {
+    if (mysqli_num_rows($result) > 0) {
         
     } else {
         // Préparation de la requête
