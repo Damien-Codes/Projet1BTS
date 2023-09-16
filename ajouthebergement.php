@@ -112,7 +112,7 @@
         if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] == 0) {
             // Chemin de destination où vous souhaitez enregistrer le fichier téléchargé sur le serveur
             $uploadDir = "chemin/vers/repertoire/de/destination/";
-            $uploadPath = $uploadDir . $_FILES["photo"]["name"];
+            $uploadPath = $uploadDir . $_FILES["photo"]["name"];nom
     
             // Déplacez le fichier téléchargé vers le répertoire de destination
             if (move_uploaded_file($_FILES["photo"]["tmp_name"], $uploadPath)) {
@@ -126,7 +126,7 @@
                 $result = mysqli_query($idc, $requete);
     
                 if ($result) {
-                    header("location:gestionnaire.html");
+                    header("location:gestionnaire.php");
                 } else {
                     echo "<p>Une erreur est survenue lors de l'ajout : " . mysqli_error($idc) . "</p>";
                 }

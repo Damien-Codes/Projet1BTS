@@ -19,8 +19,7 @@
         </nav>
     </header>
         <h3><a href="ajouthebergement.php">Ajouter un Hébergement</a></h3>
-
-    <div class="carte">
+        
     <?php 
         // Inclure le fichier de connexion à la base de données
         include("bdd.php");
@@ -30,134 +29,39 @@
         $result = mysqli_query($idc, $query);
         
         
-         // Afficher les données
-         while ($row = mysqli_fetch_assoc($result)) {
-            // Afficher les données 
-            echo "Numéro de l'hébergement : " . $row['NOHEB'] . "<br>";
-            echo "Type de l'hébergement : " . $row['CODETYPEHEB'] . "<br>";
-            echo "Nom de l'hébergement : " . $row['NOMHEB']. "<br>";
-            echo "Nombres de places : " . $row['NBPLACEHEB']. "<br>";
-            echo "Surface : " . $row['SURFACEHEB']. " m² <br>";
-            echo "Internet : " . $row['INTERNET']. "<br>";
-            echo "Année de l'hébergement : " . $row['ANNEEHEB']. " ans <br>";
-            echo "Secteur de l'hébergement : " . $row['SECTEURHEB']. "<br>";
-            echo "Orientation de l'hébergement : " . $row['ORIENTATIONHEB']. "<br>";
-            echo "État de l'hébergement : " . $row['ETATHEB']. "<br>";
-            echo "Description de l'hébergement : " . $row['DESCRIHEB']. "<br>";
-            echo "Image de l'hébergement : " . $row['PHOTOHEB']. "<br>";
-            echo "Tarif de l'hébergement : " . $row['TARIFSEMHEB']. " $<br>";
-            
-            break;
-         };
+        if ($result->num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Pour chaque enregistrement, une carte cera générez avec les informations
+                echo '<div class="carte">';
+                echo '<img src="' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+                echo '<h2>' . (isset($row['NOMHEB']) ? $row['NOMHEB'] : '') . '</h2>';
+                echo '<p>Numéro Hebergement: ' . (isset($row['NOHEB']) ? $row['NOHEB'] : '') . '</p>';
+                echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
+                echo '<p>Nombre de places: ' . (isset($row['NBPLACEHEB']) ? $row['NBPLACEHEB'] : '') . '</p>';
+                echo '<p>Surfaces: ' . (isset($row['SURFACEHEB']) ? $row['SURFACEHEB'] : '') . ' m²</p>';
+                echo '<p>INTERNET: ' . (isset($row['INTERNET']) ? ($row['INTERNET'] ? 'Oui' : 'Non') : '') . '</p>';
+                echo '<p>Années: ' . (isset($row['ANNEEHEB']) ? $row['ANNEEHEB'] : '') . '</p>';
+                echo '<p>Secteur: ' . (isset($row['SECTEURHEB']) ? $row['SECTEURHEB'] : '') . '</p>';
+                echo '<p>Orientation: ' . (isset($row['ORIENTATIONHEB']) ? $row['ORIENTATIONHEB'] : '') . '</p>';
+                echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
+                echo '<p>Description: ' . (isset($row['DESCRIHEB']) ? $row['DESCRIHEB'] : '') . '</p>';
+                echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
+
+                echo "<button><a href='modifier.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>🔧</a></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                echo "<button><a href='supprimehebergement.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>❌</a></button>";
+                echo '</div>';
+                
+            }
+        } else {
+            echo "Aucun enregistrement trouvé dans la base de données.";
+        }
 
         // Fermer la connexion à la base de données
         mysqli_close($idc);
         ?>
-    </div>
-    <div class="carte">
-    <?php 
-        // Inclure le fichier de connexion à la base de données
-        include("bdd.php");
-        
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
-        $query = "SELECT * FROM hebergement";
-        $result = mysqli_query($idc, $query);
-        
-        
-         // Afficher les données
-         while ($row = mysqli_fetch_assoc($result)) {
-            // Afficher les données 
-            echo "Numéro de l'hébergement : " . $row['NOHEB'] . "<br>";
-            echo "Type de l'hébergement : " . $row['CODETYPEHEB'] . "<br>";
-            echo "Nom de l'hébergement : " . $row['NOMHEB']. "<br>";
-            echo "Nombres de places : " . $row['NBPLACEHEB']. "<br>";
-            echo "Surface : " . $row['SURFACEHEB']. " m² <br>";
-            echo "Internet : " . $row['INTERNET']. "<br>";
-            echo "Année de l'hébergement : " . $row['ANNEEHEB']. " ans <br>";
-            echo "Secteur de l'hébergement : " . $row['SECTEURHEB']. "<br>";
-            echo "Orientation de l'hébergement : " . $row['ORIENTATIONHEB']. "<br>";
-            echo "État de l'hébergement : " . $row['ETATHEB']. "<br>";
-            echo "Description de l'hébergement : " . $row['DESCRIHEB']. "<br>";
-            echo "Image de l'hébergement : " . $row['PHOTOHEB']. "<br>";
-            echo "Tarif de l'hébergement : " . $row['TARIFSEMHEB']. " $<br>";
-            
-            break;
-         };
-
-        // Fermer la connexion à la base de données
-        mysqli_close($idc);
-        ?>
-    </div>
     <h3><a href="ajoutevenement.php">Ajouter un Événement</a></h3>
 
-    <div class="carte">
-    <?php 
-        // Inclure le fichier de connexion à la base de données
-        include("bdd.php");
-        
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
-        $query = "SELECT * FROM hebergement";
-        $result = mysqli_query($idc, $query);
-        
-        
-         // Afficher les données
-         while ($row = mysqli_fetch_assoc($result)) {
-            // Afficher les données 
-            echo "Numéro de l'hébergement : " . $row['NOHEB'] . "<br>";
-            echo "Type de l'hébergement : " . $row['CODETYPEHEB'] . "<br>";
-            echo "Nom de l'hébergement : " . $row['NOMHEB']. "<br>";
-            echo "Nombres de places : " . $row['NBPLACEHEB']. "<br>";
-            echo "Surface : " . $row['SURFACEHEB']. " m² <br>";
-            echo "Internet : " . $row['INTERNET']. "<br>";
-            echo "Année de l'hébergement : " . $row['ANNEEHEB']. " ans <br>";
-            echo "Secteur de l'hébergement : " . $row['SECTEURHEB']. "<br>";
-            echo "Orientation de l'hébergement : " . $row['ORIENTATIONHEB']. "<br>";
-            echo "État de l'hébergement : " . $row['ETATHEB']. "<br>";
-            echo "Description de l'hébergement : " . $row['DESCRIHEB']. "<br>";
-            echo "Image de l'hébergement : " . $row['PHOTOHEB']. "<br>";
-            echo "Tarif de l'hébergement : " . $row['TARIFSEMHEB']. " $<br>";
-            
-            break;
-         };
 
-        // Fermer la connexion à la base de données
-        mysqli_close($idc);
-        ?>
-    </div>
-    <div class="carte">
-    <?php 
-        // Inclure le fichier de connexion à la base de données
-        include("bdd.php");
-        
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
-        $query = "SELECT * FROM hebergement";
-        $result = mysqli_query($idc, $query);
-        
-        
-         // Afficher les données
-         while ($row = mysqli_fetch_assoc($result)) {
-            // Afficher les données 
-            echo "Numéro de l'hébergement : " . $row['NOHEB'] . "<br>";
-            echo "Type de l'hébergement : " . $row['CODETYPEHEB'] . "<br>";
-            echo "Nom de l'hébergement : " . $row['NOMHEB']. "<br>";
-            echo "Nombres de places : " . $row['NBPLACEHEB']. "<br>";
-            echo "Surface : " . $row['SURFACEHEB']. " m² <br>";
-            echo "Internet : " . $row['INTERNET']. "<br>";
-            echo "Année de l'hébergement : " . $row['ANNEEHEB']. " ans <br>";
-            echo "Secteur de l'hébergement : " . $row['SECTEURHEB']. "<br>";
-            echo "Orientation de l'hébergement : " . $row['ORIENTATIONHEB']. "<br>";
-            echo "État de l'hébergement : " . $row['ETATHEB']. "<br>";
-            echo "Description de l'hébergement : " . $row['DESCRIHEB']. "<br>";
-            echo "Image de l'hébergement : " . $row['PHOTOHEB']. "<br>";
-            echo "Tarif de l'hébergement : " . $row['TARIFSEMHEB']. " $<br>";
-            
-            break;
-         };
-
-        // Fermer la connexion à la base de données
-        mysqli_close($idc);
-        ?>
-    </div>
     <footer>
         <p>&copy; 2023 Agence de Locations d'Appartement</p>
     </footer>
