@@ -102,6 +102,7 @@
     $photo = $_POST['photo'];
     $tarif = $_POST['tarif'];
 
+    
     $requete = "INSERT INTO hebergement (NOHEB, CODETYPEHEB, NOMHEB, NBPLACEHEB, SURFACEHEB, INTERNET, ANNEEHEB, SECTEURHEB, ORIENTATIONHEB, ETATHEB, DESCRIHEB, PHOTOHEB, TARIFSEMHEB) VALUES ('$numero', '$type', '$nom', '$places', '$surface', '$internet', '$annee', '$secteur', '$orientation', '$etat', '$description', '$photo', '$tarif')";
     $result = mysqli_query($idc, $requete);
     
@@ -112,7 +113,7 @@
         if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] == 0) {
             // Chemin de destination où vous souhaitez enregistrer le fichier téléchargé sur le serveur
             $uploadDir = "chemin/vers/repertoire/de/destination/";
-            $uploadPath = $uploadDir . $_FILES["photo"]["name"];nom
+            $uploadPath = $uploadDir . $_FILES["photo"]["name"];
     
             // Déplacez le fichier téléchargé vers le répertoire de destination
             if (move_uploaded_file($_FILES["photo"]["tmp_name"], $uploadPath)) {
