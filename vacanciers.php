@@ -17,9 +17,8 @@
                 <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>
-        <h1>Bienvenue sur notre site de locations de vacances</h1>
     </header>
-    
+    <h1>Bienvenue sur notre site de locations de vacances</h1>
 
     <div class="container">
         <h2>Découvrez nouvelles offres de locations</h2>
