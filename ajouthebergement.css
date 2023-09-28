@@ -114,7 +114,7 @@ form input, form textarea, form select {
 }
 
 select {
-    height: 40px; /* Ajuster la hauteur pour correspondre aux autres champs */
+    height: 40px;
 }
 
 form input[type="checkbox"] {
