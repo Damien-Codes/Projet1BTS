@@ -19,7 +19,7 @@
         </nav>
     </header>
     <h1 class="titre">Ajouter un hébergement</h1>
-    <form action="" method="POST" enctype='multipart/form-data'>
+    <form action="" method="post" enctype="multipart/form-data">
         <!-- Numéro Hebergement -->
         Numéro Hebergement :
         <input type="number" name="numero" required><br>
@@ -72,13 +72,13 @@
 
         <!-- Photo de l'hebergement -->
         Photo de l'hebergement :
-        <input type="file" name="photo"><br>
+        <input type="file" name="picture"><br>
 
         <!--  Tarif de l'Hebergement -->
         Tarif de l'Hebergement :
         <input step="0.01" type="number" name="tarif" required><br>
 
-        <input type="submit" value="Ajouter Hébergement">
+        <input type="submit" name="submit" value="Ajouter Hébergement">
         <input type="reset" value="Annuler">
     </form>
 
@@ -88,7 +88,6 @@
     <?php
     if (isset($_POST['submit'])){
         include('bdd.php');
-
     
         $numero = $_POST["numero"];
         $type = $_POST["type"];
@@ -101,8 +100,14 @@
         $orientation = $_POST["orientation"];
         $etat = $_POST["etat"];
         $description = $_POST["description"];
-        $photo = $_POST["photo"];
+        $uuid = uniqid();
+        echo $_POST["description"];
+        print_r($_POST["picture"]);
+        $extension = pathinfo($_POST["picture"]['name'], PATHINFO_EXTENSION);
+        $imgName = strtolower($uuid . '.' . $extension);
         $tarif = $_POST["tarif"];
+
+        die($imgName);
 
         $requete = "INSERT INTO hebergement (NOHEB, CODETYPEHEB, NOMHEB, NBPLACEHEB, SURFACEHEB, INTERNET, ANNEEHEB, SECTEURHEB, ORIENTATIONHEB, ETATHEB, DESCRIHEB, PHOTOHEB, TARIFSEMHEB) 
                                     VALUES  ('$numero', '$type', '$nom', '$places', '$surface', '$internet', '$annee', '$secteur', '$orientation', '$etat', '$description', '$photo', '$tarif')";
@@ -118,6 +123,9 @@
     
         // Fermer la connexion à la base de données
         mysqli_close($idc);
+    }
+    else{
+        echo "error";
     }
     ?>
 </body>

@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $b = $_POST["mdp"];
     $type = $_POST["type"];
 
-    // Utilisation de mysqli_real_escape_string pour échapper les données (attention, ce n'est pas aussi sûr que les requêtes préparées)
+    // Utilisation de mysqli_real_escape_string pour échapper les données
     $a = mysqli_real_escape_string($idc, $a);
     $b = mysqli_real_escape_string($idc, $b);
 
@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // La connexion est réussie
         $_SESSION["user"] = $a;
         $_SESSION["mdp"] = $b;
-        $_SESSION["type"] = $type;
 
         // Vérifie le type de compte de l'utilisateur
         switch ($_POST['type']) {

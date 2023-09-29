@@ -57,7 +57,8 @@
             echo "<td>" . (isset($row['NOPORTCPTE']) ? $row['NOPORTCPTE'] : '') . "</td>";
             
             // Ajouter un lien de suppression pour chaque ligne
-            echo "<td><a href='modifier.php?NOMCPTE=" . urlencode($row['NOMCPTE']) . "' class='lastth'>🔧</a> <a href='supprime.php?NOMCPTE=" . urlencode($row['NOMCPTE']) . "' class='lastth'>❌</a></td>";
+            echo "<td><a href='modifier.php?NOMCPTE=" . urlencode($row['NOMCPTE']) . "' class='lastth'>🔧</a> 
+            <a href='supprime.php?NOMCPTE=" . urlencode($row['NOMCPTE']) . "' class='lastth'>❌</a></td>";
             echo "</tr>";
         }
         
