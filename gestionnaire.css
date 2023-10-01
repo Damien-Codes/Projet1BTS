@@ -112,15 +112,16 @@ h3 a{
 }
 
 .carte img {
-    max-width: 100%;
-    height: auto;
+    max-width: 203px;
+    max-height: 129px;
+    text-align: center;
+    margin-left: 10%;
 }
 
 .nomheb {
     font-size: 20px;
     margin-top: 10px;
 }
-
 
 .carte p {
     margin: 10px 0;

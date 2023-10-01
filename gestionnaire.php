@@ -33,7 +33,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
                 // Pour chaque enregistrement, une carte cera générez avec les informations
                 echo '<div class="carte">';
-                echo '<img src="' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+                echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
                 echo '<p>Numéro Hebergement: ' . (isset($row['NOHEB']) ? $row['NOHEB'] : '') . '</p>';
                 echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
                 echo '<p>Surfaces: ' . (isset($row['SURFACEHEB']) ? $row['SURFACEHEB'] : '') . ' m²</p>';

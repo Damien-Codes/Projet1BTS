@@ -72,7 +72,7 @@
 
         <!-- Photo de l'hebergement -->
         Photo de l'hebergement :
-        <input type="file" name="picture"><br>
+        <input type="file" name="picture" accept="image/*"><br>
 
         <!--  Tarif de l'Hebergement -->
         Tarif de l'Hebergement :
@@ -101,19 +101,35 @@
         $etat = $_POST["etat"];
         $description = $_POST["description"];
         $uuid = uniqid();
-        echo $_POST["description"];
-        print_r($_POST["picture"]);
-        $extension = pathinfo($_POST["picture"]['name'], PATHINFO_EXTENSION);
+        $extension = pathinfo($_FILES["picture"]['name'], PATHINFO_EXTENSION);
         $imgName = strtolower($uuid . '.' . $extension);
         $tarif = $_POST["tarif"];
+        
+        $path = './img/';
+        $destinationPath = $path . $imgName;
 
-        die($imgName);
+        try {
+
+            if (move_uploaded_file($_FILES["picture"]['tmp_name'], $destinationPath)) {
+                
+            }
+            else{
+                echo "error files";
+            }
+            
+        }
+        catch(Exeption $e){
+            die($e);
+        }
+
+        
 
         $requete = "INSERT INTO hebergement (NOHEB, CODETYPEHEB, NOMHEB, NBPLACEHEB, SURFACEHEB, INTERNET, ANNEEHEB, SECTEURHEB, ORIENTATIONHEB, ETATHEB, DESCRIHEB, PHOTOHEB, TARIFSEMHEB) 
-                                    VALUES  ('$numero', '$type', '$nom', '$places', '$surface', '$internet', '$annee', '$secteur', '$orientation', '$etat', '$description', '$photo', '$tarif')";
+                                    VALUES  ('$numero', '$type', '$nom', '$places', '$surface', '$internet', '$annee', '$secteur', '$orientation', '$etat', '$description', '$imgName', '$tarif')";
         $result = mysqli_query($idc, $requete);
         
     
+
 
         if ($result) {
             header("location:gestionnaire.php");
