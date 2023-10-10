@@ -67,9 +67,6 @@ nav a {
 }
 
 footer {
-    position: absolute; /* Position absolue pour le pied de page */
-    bottom: 0; /* Aligner le pied de page en bas */
-    width: 100%;
     text-align: center;
     background-color: #bd2d2d;
     color: #fff;

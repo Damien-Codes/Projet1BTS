@@ -64,7 +64,10 @@
 
         <!-- ETATHEB -->
         Etat de l'Hebergement :
-        <input type="text" name="etat" required><br>
+        <select name="etat">
+            <option value="Disponible">Disponible</option>
+            <option value="Indisponible">Indisponible</option>
+        </select> <br>
 
         <!-- Desinscription de l'Hebergement -->
         Desinscription de l'Hebergement :
