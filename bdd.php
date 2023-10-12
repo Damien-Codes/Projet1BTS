@@ -1,3 +1,3 @@
 <?php
- $idc = mysqli_connect("localhost", "root", "", "resa");
+$idc = mysqli_connect("localhost", "root", "", "resa");
  ?>

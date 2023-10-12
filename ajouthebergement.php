@@ -70,7 +70,7 @@
         </select> <br>
 
         <!-- Desinscription de l'Hebergement -->
-        Desinscription de l'Hebergement :
+        Description de l'Hebergement :
         <textarea name="description" rows="4"></textarea><br>
 
         <!-- Photo de l'hebergement -->
@@ -144,7 +144,7 @@
         mysqli_close($idc);
     }
     else{
-        echo "error";
+        echo "";
     }
     ?>
 </body>
