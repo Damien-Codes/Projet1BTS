@@ -82,7 +82,9 @@
         $resultat = mysqli_query($idc, $requete);
         
         if ($resultat) {
-            header("location:utilisateur.php");
+            echo "<h1>Compte ajouter</h1>";
+            // sleep(5);
+            // header("location:utilisateur.php");
         } else {
             echo "<p>Une erreur est survenue lors de l'ajout : Utilisateur ou mot de passe déjà utilisé" . mysqli_error($idc) . "</p>";
         }

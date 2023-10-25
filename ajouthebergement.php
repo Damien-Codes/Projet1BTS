@@ -135,7 +135,8 @@
 
 
         if ($result) {
-            header("location:gestionnaire.php");
+            echo "<h1>Hebergement ajouter</h1>";
+            header( "Refresh:5; url=gestionnaire.php");
         } else {
             echo "<p>Une erreur est survenue lors de l'ajout : " . mysqli_error($idc) . "</p>";
         }

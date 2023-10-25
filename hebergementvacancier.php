@@ -22,27 +22,29 @@
 
 
     <div class="container">
-        <h2>Découvrez de nouvelles offres de locations</h2>
+        <h2>Découvrez de nouvelles offres de locations</h2><br>
 
-        <form action="" method="Get" style='text-align: center  '>
-            <input type="search" name="terme" placeholder="Recherche...">
-            <input type="submit" name="s" value="Rechercher">
-        </form>
+        <form action="" method="GET" style='text-align: center'>
+            <input type="text" name="nom" placeholder="Nom..."> <br>
+            <input type="submit" name="submit" value="Rechercher">
+    </form>
 
-        <?php 
-        // Inclure le fichier de connexion à la base de données
-        include("bdd.php");
+<?php
+    include("bdd.php");
+
+    if (isset($_GET["submit"])) {
+        $nom = $_GET["nom"];
         
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
-        $query = "SELECT * FROM hebergement";
+        // Vous pouvez utiliser des paramètres liés pour éviter les injections SQL
+        $query = "SELECT * FROM hebergement WHERE CONCAT(NOMHEB) LIKE '%$nom%'";
         $result = mysqli_query($idc, $query);
-        
-        
+
         if ($result->num_rows > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 // Pour chaque enregistrement, une carte cera générez avec les informations
                 echo '<div class="carte">';
                 echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+                echo '<p>Nom Hebergement: ' . (isset($row['NOMHEB']) ? $row['NOMHEB'] : '') . '</p>';
                 echo '<p>Numéro Hebergement: ' . (isset($row['NOHEB']) ? $row['NOHEB'] : '') . '</p>';
                 echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
                 echo '<p>Surfaces: ' . (isset($row['SURFACEHEB']) ? $row['SURFACEHEB'] : '') . ' m²</p>';
@@ -59,6 +61,7 @@
         } else {
             echo "Aucun enregistrement trouvé dans la base de données.";
         }
+    }
 
         // Fermer la connexion à la base de données
         mysqli_close($idc);
