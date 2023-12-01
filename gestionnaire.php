@@ -51,7 +51,6 @@
                 echo "<button><a href='modifier.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>🔧</a></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 echo "<button><a href='supprimehebergement.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>❌</a></button></br></br>";
                 echo "<button><a href='ensavoirplus.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
-                echo "<button><a href='reservation.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>Reserver</a></button>";
                 echo '</div>';
                 
             }

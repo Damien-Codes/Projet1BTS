@@ -55,6 +55,7 @@
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
 
                 echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
+                echo "<button><a href='reservation.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>Reserver</a></button>";
                 echo '</div>';
                 
             }

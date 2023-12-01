@@ -3,30 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="hebergementvacancier.css">
+    <title>Tableau de bord - Hebergement</title>
 </head>
 <body>
-<?php
-// Inclure le fichier de connexion à la base de données
-include("bdd.php");
+    <header>
+        <h1>Tableau de bord - Vacanciers</h1>
+    </header>
+        <h3><a href="hebergementvacancier.php">Retour aux hebergements</a></h3>
 
-// Récupère les informations sur l'hébergement
-$hébergement = getHébergementById($_GET["hébergement"]);
+        <?php 
+        // Inclure le fichier de connexion à la base de données
+        include("bdd.php");
+        session_start();
+        $numero = $_GET['numero'];
+        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
+        $query = "SELECT * FROM hebergement WHERE NOHEB = $numero";
+        $result = mysqli_query($idc, $query);
+        
+        
+        if ($result->num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Pour chaque enregistrement, une carte cera générez avec les informations
+                echo '<div class="carte">';
+                echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+                echo '<p>Numéro Hebergement: ' . (isset($row['NOHEB']) ? $row['NOHEB'] : '') . '</p>';
+                echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
+                echo '<p>Surfaces: ' . (isset($row['SURFACEHEB']) ? $row['SURFACEHEB'] : '') . ' m²</p>';
+                echo '<p>Nombre de places: ' . (isset($row['NBPLACEHEB']) ? $row['NBPLACEHEB'] : '') . '</p>';
+                echo '<p>INTERNET: ' . (isset($row['INTERNET']) ? ($row['INTERNET'] ? 'Oui' : 'Non') : '') . '</p>';
+                echo '<p>Orientation: ' . (isset($row['ORIENTATIONHEB']) ? $row['ORIENTATIONHEB'] : '') . '</p>';
+                echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
+                echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
+                echo '</div>';
+                
+            }
+        } else {
+            echo "Aucun enregistrement trouvé dans la base de données.";
+        }
 
-// Affiche les informations sur l'hébergement
-echo "<h1>Réservation de l'hébergement <strong>$hébergement->nom</strong></h1>";
-echo "<p>Prix : <strong>€$hébergement->prix</strong></p>";
-echo "<p>Capacité : <strong>$hébergement->capacité</strong></p>";
+        // Fermer la connexion à la base de données
+        mysqli_close($idc);
+        ?>
+        <form action="reservation.php" method="post">
+        <center><div>
+            <!-- Champs du formulaire pour une date -->
+            <SELECT>
+                <OPTION><?php"SELECT "?></OPTION>
+            </SELECT>
+            Séléctionner une date : <input type="week" name="date"><br>
+            <!-- Champs du formulaire du Nombre d'Occupant -->
+            Nombre d'Occupant :<input type="number" name="occupant" class="style1"><br>
+            <!-- Bouton qui envoie les information a la bdd -->
+            <input type="submit" value="reservation" class="style2">
+            <!-- Bouton qui enlève toutes les information du formulaire -->
+            <input type="reset" value="Annuler" class="style2"><br>
+            </div></center>
+        </form>
+        <?php
 
-// Affiche la liste des semaines disponibles
-$semaines = getSemainesDisponibles($hébergement->id);
-echo "<ul>";
-foreach ($semaines as $semaine) {
-    echo "<li><a href='reservation-form.php?hébergement=$hébergement->id&semaine=$semaine->id'>$semaine->date_debut</strong> - <strong>$semaine->date_fin</strong></a></li>";
-}
-echo "</ul>";
+        $date = $_POST['date'];
+        $occupant = $_POST["occupant"];
 
-?>
 
+        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
+        // INSERT INTO resa (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, NBOCCUPANT, 	TARIFSEMRESA) VALUES ($date, $occupant)
+        $query = "INSERT INTO USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, NBOCCUPANT, 	TARIFSEMRESA FROM RESA VALUES COMPTE, DATEDEBSEM, NOHEB, CODEETATRESA, $date, $occupant, TARIFSEMRESA";
+        $result = mysqli_query($idc, $query);
+                ?>
+    <footer>
+        <p>&copy; 2023 Agence de Locations d'Appartement</p>
+    </footer>
 </body>
 </html>
+
+
