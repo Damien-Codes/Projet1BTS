@@ -36,6 +36,9 @@
                 echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
                 echo '</div>';
+
+
+                echo (isset($row['NBPLACEHEB']) ? $row['NBPLACEHEB'] : '');
                 
             }
         } else {
@@ -44,16 +47,15 @@
 
         // Fermer la connexion à la base de données
         mysqli_close($idc);
+
         ?>
+         
+        <h1>Veuillez  choisir une date pour terminer votre réservations :</h1>
         <form action="reservation.php" method="post">
         <center><div>
-            <!-- Champs du formulaire pour une date -->
-            <SELECT>
-                <OPTION><?php"SELECT "?></OPTION>
-            </SELECT>
             Séléctionner une date : <input type="week" name="date"><br>
             <!-- Champs du formulaire du Nombre d'Occupant -->
-            Nombre d'Occupant :<input type="number" name="occupant" class="style1"><br>
+            Nombre d'Occupant :<input type="number" name="occupant" class="style1" min="1" ><br>
             <!-- Bouton qui envoie les information a la bdd -->
             <input type="submit" value="reservation" class="style2">
             <!-- Bouton qui enlève toutes les information du formulaire -->
@@ -61,8 +63,14 @@
             </div></center>
         </form>
         <?php
+        
 
-        $date = $_POST['date'];
+
+        $sql = "INSERT INTO resa (DATEDEBSEM, DATEDEBSEM, CODEETATRESA, DATERESA, NBOCCUPANT) VALUES
+        ($date, $occupant)";
+        
+        $dateD = $_POST['DateDebSem'];
+        $dateF = $_POST['DateDebSem'];
         $occupant = $_POST["occupant"];
 
 

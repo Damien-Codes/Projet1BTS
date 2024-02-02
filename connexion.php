@@ -38,6 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $a = mysqli_real_escape_string($idc, $a);
     $b = mysqli_real_escape_string($idc, $b);
 
+
+
     $requete = "SELECT * FROM compte WHERE user = '$a' AND mdp = '$b'";
     $resultat = mysqli_query($idc, $requete);
     $ligne = mysqli_num_rows($resultat);
@@ -46,21 +48,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // La connexion est réussie
         $row = mysqli_fetch_assoc($resultat);
         $_SESSION["user"] = $a;
-        $_SESSION["mdp"] = $b;
 
-        // Vérifier le type de compte et rediriger en conséquence
-        $typeCompte = $row["TYPECOMPTE"];
-        if ($typeCompte == "adm") {
-            header("location: admin.html");
-        } elseif ($typeCompte == "vac") {
-            header("location: vacanciers.php");
-        } elseif ($typeCompte == "ges") {
-            header("location: gestionnaire.html");
+            if(isset($_SESSION["user"])){
+
+            // Vérifier le type de compte et rediriger en conséquence
+            $typeCompte = $row["TYPECOMPTE"];
+            if ($typeCompte == "adm") {
+                header("location: admin.php");
+            } elseif ($typeCompte == "vac") {
+                header("location: vacanciers.php");
+            } elseif ($typeCompte == "ges") {
+                header("location: gestionnaire.php");
+            } else {
+                // Type de compte non géré, gérer en conséquence
+                echo "Type de compte non pris en charge.";
+            }
         } else {
-            // Type de compte non géré, gérer en conséquence
-            echo "Type de compte non pris en charge.";
-        }
-    } else {
+            echo "SESSION Fermé.";
+    }
+ } else {
         // La connexion a échoué
         echo "Nom d'utilisateur ou mot de passe incorrect.";
     }

@@ -13,8 +13,7 @@
             <ul>
                 <li><a href="vacanciers.php">Accueil</a></li>
                 <li><a href="hebergementvacancier.php">Voir les Hébergements</a></li>
-                <li><a href="#">Voir les Événements</a></li>
-                <li><a href="#">Voir mes Réservations</a></li>
+                <li><a href="reservationvacancier.php">Réservations</a></li>
                 <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>

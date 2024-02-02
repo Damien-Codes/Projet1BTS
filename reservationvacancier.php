@@ -53,7 +53,7 @@
                 echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
 
-                echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
+                echo "<button><a href='reservation.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>Reserver</a></button>";
                 echo '</div>';
                 
             }
@@ -79,8 +79,8 @@
                 echo '<p>Orientation: ' . (isset($row['ORIENTATIONHEB']) ? $row['ORIENTATIONHEB'] : '') . '</p>';
                 echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
-
-                echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
+                
+                echo "<button><a href='reservation.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>Reserver</a></button>";
                 echo '</div>';
                 
             }

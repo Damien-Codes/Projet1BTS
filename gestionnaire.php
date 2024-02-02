@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION["user"]) == False)
+    header("location:index.html");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +18,6 @@
             <ul>
                 <li><a href="gestionnaire.php">Accueil</a></li>
                 <li><a href="ajouthebergement.php">Hébergements</a></li>
-                <li><a href="#">Événements</a></li>
                 <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>
