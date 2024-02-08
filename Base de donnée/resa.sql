@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2023 at 10:51 PM
+-- Generation Time: Feb 08, 2024 at 08:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,6 +60,14 @@ CREATE TABLE `etat_resa` (
   `NOMETATRESA` char(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `etat_resa`
+--
+
+INSERT INTO `etat_resa` (`CODEETATRESA`, `NOMETATRESA`) VALUES
+('1', 'Disponible'),
+('2', 'Indisponible');
+
 -- --------------------------------------------------------
 
 --
@@ -87,9 +95,11 @@ CREATE TABLE `hebergement` (
 --
 
 INSERT INTO `hebergement` (`NOHEB`, `CODETYPEHEB`, `NOMHEB`, `NBPLACEHEB`, `SURFACEHEB`, `INTERNET`, `ANNEEHEB`, `SECTEURHEB`, `ORIENTATIONHEB`, `ETATHEB`, `DESCRIHEB`, `PHOTOHEB`, `TARIFSEMHEB`) VALUES
-(3, '1', 'azertyd', 8, 7, 1, 1413, 'TEST', 'TEST', 'TEST', '', 'ethics-947576_1280.jpg', 0.09),
-(14, '5', 'Domingos', 4, 15, 1, 2024, 'Paris', 'Est', 'Neuf', 'gsg', NULL, 2000.00),
-(53, '2', 'maison', 4, 15, 1, 2024, 'Paris', 'Est', 'Neuf', NULL, NULL, 2000.00);
+(1, '3', 'Marie Mozette', 14, 141, 0, 2019, 'Esonne', 'Nord', 'Disponible', 'Chalet très important 3 place 2 piscine et un spas 12', '6526cdec0e31c.jpg', 1.00),
+(6, '4', 'Chalet', 4, 50, 1, 2023, 'Paris', 'SUD', 'Disponible', 'CAHALET A PARIS', '656a1c31e253a.png', 200.98),
+(53, '4', 'Chalet', 4, 46, 1, 4, 'Nord-Pas-de-Cal', 'Nord', 'Disponible', 'Chalet du Nord-Pas-de-Calais', '656a4e1d33103.png', 600.00),
+(98, '1', 'Appartement', 30, 80, 1, 30, 'Nord-Pas-de-Cal', 'Est', 'Disponible', 'Appartement du Nord-Pas-de-Calais', '656a4eb12d152.png', 500.00),
+(471, '1', '471', 471, 471, 1, 471, '471', '471', '471', '471', '65185355ef4a9.jpg', 471.00);
 
 -- --------------------------------------------------------
 
@@ -120,6 +130,28 @@ CREATE TABLE `semaine` (
   `DATEDEBSEM` date NOT NULL,
   `DATEFINSEM` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `semaine`
+--
+
+INSERT INTO `semaine` (`DATEDEBSEM`, `DATEFINSEM`) VALUES
+('2023-12-02', '2023-12-09'),
+('2023-12-09', '2023-12-16'),
+('2023-12-16', '2023-12-23'),
+('2023-12-23', '2023-12-30'),
+('2024-01-06', '2024-01-13'),
+('2024-01-13', '2024-01-20'),
+('2024-01-20', '2024-01-27'),
+('2024-01-27', '2024-02-03'),
+('2024-02-03', '2024-02-10'),
+('2024-02-10', '2024-02-17'),
+('2024-02-17', '2024-02-24'),
+('2024-02-24', '2024-03-02'),
+('2024-03-02', '2024-03-09'),
+('2024-03-09', '2024-03-16'),
+('2024-03-16', '2024-03-23'),
+('2024-03-23', '2024-03-30');
 
 -- --------------------------------------------------------
 

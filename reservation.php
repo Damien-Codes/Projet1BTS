@@ -10,7 +10,7 @@
     <header>
         <h1>Tableau de bord - Vacanciers</h1>
     </header>
-        <h3><a href="hebergementvacancier.php">Retour aux hebergements</a></h3>
+        <h3><a href="reservationvacancier.php">Retour aux réservations</a></h3>
 
         <?php 
         // Inclure le fichier de connexion à la base de données
@@ -35,11 +35,7 @@
                 echo '<p>Orientation: ' . (isset($row['ORIENTATIONHEB']) ? $row['ORIENTATIONHEB'] : '') . '</p>';
                 echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
-                echo '</div>';
-
-
-                echo (isset($row['NBPLACEHEB']) ? $row['NBPLACEHEB'] : '');
-                
+                echo '</div>';                
             }
         } else {
             echo "Aucun enregistrement trouvé dans la base de données.";
@@ -53,7 +49,7 @@
         <h1>Veuillez  choisir une date pour terminer votre réservations :</h1>
         <form action="reservation.php" method="post">
         <center><div>
-            Séléctionner une date : <input type="week" name="date"><br>
+            Séléctionner une date : <input type="week" name="dateloc"><br>
             <!-- Champs du formulaire du Nombre d'Occupant -->
             Nombre d'Occupant :<input type="number" name="occupant" class="style1" min="1" ><br>
             <!-- Bouton qui envoie les information a la bdd -->
@@ -63,16 +59,11 @@
             </div></center>
         </form>
         <?php
-        
 
 
-        $sql = "INSERT INTO resa (DATEDEBSEM, DATEDEBSEM, CODEETATRESA, DATERESA, NBOCCUPANT) VALUES
-        ($date, $occupant)";
-        
-        $dateD = $_POST['DateDebSem'];
-        $dateF = $_POST['DateDebSem'];
-        $occupant = $_POST["occupant"];
-
+$sql = "INSERT INTO resa (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, DATEARRHES, MONTANTARRHES, NBOCCUPANT, TARIFSEMRESA)
+        VALUES ($_SESSION, dateloc, NOHEB, CODEETATRESA, DATERESA, MONTANTARRHES, occupant, TARIFSEMRESA)";
+        $result = mysqli_query($idc, $sql);
 
         // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
         // INSERT INTO resa (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, NBOCCUPANT, 	TARIFSEMRESA) VALUES ($date, $occupant)
