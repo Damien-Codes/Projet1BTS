@@ -5,10 +5,10 @@ include("bdd.php");
 
 if(isset($_GET['numero'])) {
     $c = $_GET['numero'];
+
     $requete = "DELETE FROM hebergement WHERE NOHEB = '$c'";
 
     $resultat = mysqli_query($idc, $requete);
-
 
     if (!$resultat) {
         echo "<center><h1>Echec de la suppression $requete</h1></center>";
@@ -26,7 +26,6 @@ if(isset($_GET['numero'])) {
 } else {
     echo "<center><h1>Aucune valeur NOHEB fournie.</h1></center>";
 }
-mysqli_close($idc);
 ?>
 </body>
 </html>

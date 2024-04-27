@@ -35,7 +35,7 @@
         $nom = $_GET["nom"];
         
         // Vous pouvez utiliser des paramètres liés pour éviter les injections SQL
-        $query = "SELECT * FROM hebergement WHERE CONCAT(NOMHEB) LIKE '%$nom%'";
+        $query = "SELECT * FROM hebergement WHERE NOMHEB = $nom ";
         $result = mysqli_query($idc, $query);
 
         if ($result->num_rows > 0) {

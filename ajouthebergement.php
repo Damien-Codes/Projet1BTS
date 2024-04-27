@@ -31,7 +31,6 @@
             <option value="2">Bungalow</option>
             <option value="3">Mobil Home</option>
             <option value="4">Chalet</option>
-            <option value="5">Autres</option>
         </select> <br>
 
         <!-- Nom de l'Hebergement -->
@@ -64,10 +63,21 @@
 
         <!-- ETATHEB -->
         Etat de l'Hebergement :
-        <select name="etat">
-            <option value="Disponible">Disponible</option>
-            <option value="Indisponible">Indisponible</option>
-        </select> <br>
+        <select name="etat" id="select_option">
+        <?php
+        // Requête pour récupérer les données
+            $queryss = "SELECT * FROM etat_resa";
+            $result = mysqli_query($idc, $queryss);
+            if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['NOMETATRESA'] . '">' . $row['NOMETATRESA'] . '</option>';
+                }
+            } else {
+                echo '<option value="">Aucune option disponible</option>';
+            }
+            ?>
+        </select>
 
         <!-- Desinscription de l'Hebergement -->
         Description de l'Hebergement :
