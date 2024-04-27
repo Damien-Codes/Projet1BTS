@@ -28,55 +28,57 @@
             <input type="submit" name="submit" value="Rechercher">
     </form>
 
-<?php
-    include("bdd.php");
+    <?php
+// Include database connection file (assuming it uses mysqli)
+include("bdd.php");
 
-    if (isset($_GET["submit"])) {
-        $nom = $_GET["nom"];
-        
-        // Vous pouvez utiliser des paramètres liés pour éviter les injections SQL
-        $query = "SELECT * FROM hebergement WHERE NOMHEB = $nom ";
-        $result = mysqli_query($idc, $query);
+// Search functionality
+if (isset($_GET["submit"])) {
+    $nom = $_GET["nom"];
 
-        if ($result->num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Pour chaque enregistrement, une carte cera générez avec les informations
-                echo '<div class="carte">';
-                echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
-                echo '<p>Nom Hebergement: ' . (isset($row['NOMHEB']) ? $row['NOMHEB'] : '') . '</p>';
-                echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
+    // Execute sanitized search query using GROUP BY to eliminate duplicates
+    $query = "SELECT * FROM hebergement WHERE NOMHEB LIKE '%$nom%' GROUP BY NOHEB";
+    $result = mysqli_query($idc, $query);
 
-                echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
-                echo '</div>';
-                
-            }
-        } else {
-            echo "Aucun enregistrement trouvé lié a votre recherche.";
+    // Display search results if any
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="carte">';
+            echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+            echo '<p>Nom Hebergement: ' . $row['NOMHEB'] . '</p>';
+            echo '<p>Type Hebergement: ' . $row['CODETYPEHEB'] . '</p>';
+            echo '<p>Secteur de l\'hebergement: ' . $row['SECTEURHEB'] . '</p>';
+            echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
+            echo '</div>';
         }
+    } else {
+        echo "Aucun enregistrement trouvé lié à votre recherche.";
     }
 
-        $query = "SELECT * FROM hebergement";
-        $result = mysqli_query($idc, $query);
+    // Close the database connection
+}
 
-        if ($result->num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Pour chaque enregistrement, une carte cera générez avec les informations
-                echo '<div class="carte">';
-                echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
-                echo '<p>Nom Hebergement: ' . (isset($row['NOMHEB']) ? $row['NOMHEB'] : '') . '</p>';
-                echo '<p>Type Hebergement: ' . (isset($row['CODETYPEHEB']) ? $row['CODETYPEHEB'] : '') . '</p>';
+// Display all accommodations (default view)
+$querys = "SELECT * FROM hebergement";
+$result = mysqli_query($idc, $querys);
 
-                echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
-                echo '</div>';
-                
-            }
-        } else {
-            echo "Aucun enregistrement trouvé dans la base de données.";
-        }
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="carte">';
+        echo '<img src="./img/' . $row['PHOTOHEB'] . '" alt="Hébergement Photo">';
+        echo '<p>Nom Hebergement: ' . $row['NOMHEB'] . '</p>';
+        echo '<p>Type Hebergement: ' . $row['CODETYPEHEB'] . '</p>';
+        echo '<p>Secteur de l\'hebergement: ' . $row['SECTEURHEB'] . '</p>';
+        echo "<button><a href='ensavoirplusvac.php?numero=" . urlencode($row['NOHEB']) . "' class='lastth'>En Savoir +</a></button>";
+        echo '</div>';
+    }
+} else {
+    echo "Aucun enregistrement trouvé dans la base de données.";
+}
+?>
 
-        // Fermer la connexion à la base de données
-        mysqli_close($idc);
-        ?>
+
+
         </div>
     </div>
     

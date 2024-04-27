@@ -1,3 +1,8 @@
+<?php 
+        // Inclure le fichier de connexion à la base de données
+        include("bdd.php");
+        session_start();
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +17,6 @@
         <nav>
             <ul>
                 <li><a href="gestionnaire.php">Accueil</a></li>
-                <li><a href="ajouthebergement.php">Hébergements</a></li>
-                <li><a href="#">Événements</a></li>
                 <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
         </nav>
@@ -23,15 +26,24 @@
         <!-- Numéro Hebergement -->
         Numéro Hebergement :
         <input type="number" name="numero" required><br>
-
+        
+        Type de l'Hebergement :
         <!-- Code de l'Hebergement -->
-        Code de l'Hebergement :
-        <select name="type">
-            <option value="1">Appartement</option>
-            <option value="2">Bungalow</option>
-            <option value="3">Mobil Home</option>
-            <option value="4">Chalet</option>
-        </select> <br>
+        <select name="type" id="select_option">
+        <?php
+        // Requête pour récupérer les données
+            $queryss = "SELECT * FROM type_heb";
+            $result = mysqli_query($idc, $queryss);
+            if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['CODETYPEHEB'] . '">' . $row['NOMTYPEHEB'] . '</option>';
+                }
+            } else {
+                echo '<option value="">Aucune option disponible</option>';
+            }
+            ?>
+        </select>
 
         <!-- Nom de l'Hebergement -->
         Nom de l'Hebergement :
@@ -146,7 +158,7 @@
 
         if ($result) {
             echo "<h1>Hebergement ajouter</h1>";
-            header( "Refresh:5; url=gestionnaire.php");
+            header( "Refresh:2; url=gestionnaire.php");
         } else {
             echo "<p>Une erreur est survenue lors de l'ajout : " . mysqli_error($idc) . "</p>";
         }

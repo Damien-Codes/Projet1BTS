@@ -10,16 +10,11 @@ if(isset($_GET['numero'])) {
 
     $resultat = mysqli_query($idc, $requete);
 
-    if (!$resultat) {
-        echo "<center><h1>Echec de la suppression $requete</h1></center>";
-        echo mysqli_error($idc);
+    if ($resultat) {
+        echo "<h1>Hebergement Supprimer</h1>";
+        header( "Refresh:2; url=gestionnaire.php");
     } else {
-        if (mysqli_affected_rows($idc)) { 
-            echo "<center><h1>Suppression effectuée</h1></center>";
-            header("location: gestionnaire.php");
-        } else {
-            echo "<center><h1>Aucun enregistrement trouvé à supprimer.</h1></center>";
-        }
+        echo "<p>Une erreur est survenue lors de l'ajout : " . mysqli_error($idc) . "</p>";
     }
 
     mysqli_close($idc);

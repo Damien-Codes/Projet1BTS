@@ -104,46 +104,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les valeurs du formulaire
     $dateloc = $_POST['dateloc'];
     $nbOccupant = $_POST['occupant'];
-    $montantarrhes = $_POST['CODEETATRESA'];
-    
+    $codeetatresa = $_POST['CODEETATRESA'];
 
 
     // Récupérer les informations d'hébergement depuis la variable $row (déjà récupérées précédemment)
     $noheb = $hebergement['NOHEB'];
-    $codeetatresa = $hebergement['CODETYPEHEB'];
-    // $montantarrhes = $hebergement['CODEETATRESA'];
+    
     $tarifsemresa = $hebergement['TARIFSEMHEB'];
     $numero = $_GET['numero'];
     
     // Initialiser les autres variables avec des valeurs par défaut (si nécessaire)
     $datedebsem = $_POST['dateloc']; // Date de début de semaine
     $dateresa = date("Y-m-d"); // Date de réservation
-    $datearrhes = ""; // date NULL
+    $datearrhes = NULL; // date NULL
 
     $user = $_SESSION['user'];
 
-    // $NORESA = "SELECT COUNT(NORESA) FROM resa";
-    // $resultat = mysqli_query($idc, $NORESA);
-    // if($resultat = NULL){
-    //     $numresa = 0;
-    // }
-    // else{
-    //     $numresa = $resulat + 1;
-    // }
+    if ($hebergement['TARIFSEMHEB'] > 0 && $_POST['occupant'] > 0) {
+        $montantarrhes = (float) $hebergement['TARIFSEMHEB'] * $_POST['occupant'];
+    } else {
+        $montantarrhes = 0; // Set to 0 if conditions not met
+    }
+    
 
     // Construire la requête SQL d'insertion
     $sql = "INSERT INTO resa
-            (NORESA, USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, DATEARRHES, MONTANTARRHES, NBOCCUPANT, TARIFSEMRESA)
-            VALUES ($noheb,
-                    '$user',
-                   '$datedebsem',
-                   $noheb, 
-                   '$montantarrhes', 
-                   '$dateresa', 
-                   NULL, 
-                   $montantarrhes, 
-                   $nbOccupant, 
-                   $tarifsemresa)";
+    (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, DATEARRHES, MONTANTARRHES, NBOCCUPANT, TARIFSEMRESA)
+    VALUES ('$user',
+           '$datedebsem',
+           $noheb,
+           '$codeetatresa',
+           '$dateresa',
+           NULL,
+           $montantarrhes,
+           $nbOccupant,
+           $tarifsemresa)";
 
 echo $sql;
     // Exécuter la requête SQL d'insertion
@@ -163,5 +158,3 @@ echo $sql;
     </footer>
 </body>
 </html>
-
-

@@ -24,8 +24,6 @@ if(isset($_SESSION["user"]) == False)
     </header>
         <h3><a href="ajouthebergement.php">Ajouter un Hébergement</a></h3>
 
-        
-        
     <?php 
         // Inclure le fichier de connexion à la base de données
         include("bdd.php");
@@ -65,7 +63,6 @@ if(isset($_SESSION["user"]) == False)
         // Fermer la connexion à la base de données
         mysqli_close($idc);
         ?>
-    <h3><a href="ajoutevenement.php">Ajouter un Événement</a></h3>
 
 
     <footer>

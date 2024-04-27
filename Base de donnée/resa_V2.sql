@@ -1,0 +1,83 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Apr 27, 2024 at 07:46 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `resa`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resa`
+--
+
+CREATE TABLE `resa` (
+  `NORESA` int NOT NULL,
+  `USER` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `DATEDEBSEM` date NOT NULL,
+  `NOHEB` int NOT NULL,
+  `CODEETATRESA` char(2) COLLATE utf8mb4_general_ci NOT NULL,
+  `DATERESA` date DEFAULT NULL,
+  `DATEARRHES` date DEFAULT NULL,
+  `MONTANTARRHES` decimal(7,2) DEFAULT NULL,
+  `NBOCCUPANT` int DEFAULT NULL,
+  `TARIFSEMRESA` decimal(7,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `resa`
+--
+ALTER TABLE `resa`
+  ADD PRIMARY KEY (`NORESA`),
+  ADD KEY `I_FK_RESA_COMPTE` (`USER`),
+  ADD KEY `I_FK_RESA_SEMAINE` (`DATEDEBSEM`),
+  ADD KEY `I_FK_RESA_HEBERGEMENT` (`NOHEB`),
+  ADD KEY `I_FK_RESA_ETAT_RESA` (`CODEETATRESA`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `resa`
+--
+ALTER TABLE `resa`
+  MODIFY `NORESA` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `resa`
+--
+ALTER TABLE `resa`
+  ADD CONSTRAINT `FK_RESA_COMPTE` FOREIGN KEY (`USER`) REFERENCES `compte` (`USER`),
+  ADD CONSTRAINT `FK_RESA_ETAT_RESA` FOREIGN KEY (`CODEETATRESA`) REFERENCES `etat_resa` (`CODEETATRESA`),
+  ADD CONSTRAINT `FK_RESA_HEBERGEMENT` FOREIGN KEY (`NOHEB`) REFERENCES `hebergement` (`NOHEB`),
+  ADD CONSTRAINT `FK_RESA_SEMAINE` FOREIGN KEY (`DATEDEBSEM`) REFERENCES `semaine` (`DATEDEBSEM`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
