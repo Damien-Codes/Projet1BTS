@@ -16,7 +16,7 @@
         // Inclure le fichier de connexion à la base de données
         include("bdd.php");
         $numero = $_GET['numero'];
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
+        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "hebergement"
         $query = "SELECT * FROM hebergement WHERE NOHEB = $numero";
         $result = mysqli_query($idc, $query);
         

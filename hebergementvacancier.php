@@ -51,7 +51,7 @@
                 
             }
         } else {
-            echo "Aucun enregistrement trouvé dans la base de données.";
+            echo "Aucun enregistrement trouvé lié a votre recherche.";
         }
     }
 

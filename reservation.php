@@ -16,13 +16,17 @@
         // Inclure le fichier de connexion à la base de données
         include("bdd.php");
         session_start();
-        $numero = $_GET['numero'];
+        $numero = $_GET["numero"];
         // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
         $query = "SELECT * FROM hebergement WHERE NOHEB = $numero";
         $result = mysqli_query($idc, $query);
         
-        
+
+        $hebergement;
+
+
         if ($result->num_rows > 0) {
+            
             while ($row = mysqli_fetch_assoc($result)) {
                 // Pour chaque enregistrement, une carte cera générez avec les informations
                 echo '<div class="carte">';
@@ -35,41 +39,125 @@
                 echo '<p>Orientation: ' . (isset($row['ORIENTATIONHEB']) ? $row['ORIENTATIONHEB'] : '') . '</p>';
                 echo '<p>Etat: ' . (isset($row['ETATHEB']) ? $row['ETATHEB'] : '') . '</p>';
                 echo '<p>Tarif: ' . (isset($row['TARIFSEMHEB']) ? $row['TARIFSEMHEB'] : '') . ' $</p>';
-                echo '</div>';                
+                echo '</div>';
+                $hebergement = $row;    
             }
         } else {
             echo "Aucun enregistrement trouvé dans la base de données.";
         }
 
         // Fermer la connexion à la base de données
-        mysqli_close($idc);
-
+        
         ?>
          
         <h1>Veuillez  choisir une date pour terminer votre réservations :</h1>
-        <form action="reservation.php" method="post">
+        <form method="post">
         <center><div>
-            Séléctionner une date : <input type="week" name="dateloc"><br>
-            <!-- Champs du formulaire du Nombre d'Occupant -->
+        <label for="select_option">Sélectionnez une option :</label>
+        <select name="dateloc" id="select_option">
+            <?php
+
+            // Requête pour récupérer les données
+            $querys = "SELECT * FROM semaine";
+            $result = mysqli_query($idc, $querys);
+            if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['DATEDEBSEM'] . '">' . $row['DATEDEBSEM'] . '</option>';
+                }
+            } else {
+                echo '<option value="">Aucune option disponible</option>';
+            }
+            ?>
+        </select>
+        <select name="CODEETATRESA" id="select_option">
+        <?php
+        // Requête pour récupérer les données
+            $queryss = "SELECT * FROM etat_resa";
+            $result = mysqli_query($idc, $queryss);
+            if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['CODEETATRESA'] . '">' . $row['CODEETATRESA'] . '</option>';
+                }
+            } else {
+                echo '<option value="">Aucune option disponible</option>';
+            }
+            ?>
+        </select>
+        
             Nombre d'Occupant :<input type="number" name="occupant" class="style1" min="1" ><br>
             <!-- Bouton qui envoie les information a la bdd -->
             <input type="submit" value="reservation" class="style2">
             <!-- Bouton qui enlève toutes les information du formulaire -->
             <input type="reset" value="Annuler" class="style2"><br>
+            
+        </select>
             </div></center>
         </form>
+
+
         <?php
+        
+// Traitement de la réservation (si le formulaire est soumis)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer les valeurs du formulaire
+    $dateloc = $_POST['dateloc'];
+    $nbOccupant = $_POST['occupant'];
+    $montantarrhes = $_POST['CODEETATRESA'];
+    
 
 
-$sql = "INSERT INTO resa (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, DATEARRHES, MONTANTARRHES, NBOCCUPANT, TARIFSEMRESA)
-        VALUES ($_SESSION, dateloc, NOHEB, CODEETATRESA, DATERESA, MONTANTARRHES, occupant, TARIFSEMRESA)";
-        $result = mysqli_query($idc, $sql);
+    // Récupérer les informations d'hébergement depuis la variable $row (déjà récupérées précédemment)
+    $noheb = $hebergement['NOHEB'];
+    $codeetatresa = $hebergement['CODETYPEHEB'];
+    // $montantarrhes = $hebergement['CODEETATRESA'];
+    $tarifsemresa = $hebergement['TARIFSEMHEB'];
+    $numero = $_GET['numero'];
+    
+    // Initialiser les autres variables avec des valeurs par défaut (si nécessaire)
+    $datedebsem = $_POST['dateloc']; // Date de début de semaine
+    $dateresa = date("Y-m-d"); // Date de réservation
+    $datearrhes = ""; // date NULL
 
-        // Exécutez la requête SQL pour récupérer toutes les colonnes de la table "compte"
-        // INSERT INTO resa (USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, NBOCCUPANT, 	TARIFSEMRESA) VALUES ($date, $occupant)
-        $query = "INSERT INTO USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, NBOCCUPANT, 	TARIFSEMRESA FROM RESA VALUES COMPTE, DATEDEBSEM, NOHEB, CODEETATRESA, $date, $occupant, TARIFSEMRESA";
-        $result = mysqli_query($idc, $query);
-                ?>
+    $user = $_SESSION['user'];
+
+    // $NORESA = "SELECT COUNT(NORESA) FROM resa";
+    // $resultat = mysqli_query($idc, $NORESA);
+    // if($resultat = NULL){
+    //     $numresa = 0;
+    // }
+    // else{
+    //     $numresa = $resulat + 1;
+    // }
+
+    // Construire la requête SQL d'insertion
+    $sql = "INSERT INTO resa
+            (NORESA, USER, DATEDEBSEM, NOHEB, CODEETATRESA, DATERESA, DATEARRHES, MONTANTARRHES, NBOCCUPANT, TARIFSEMRESA)
+            VALUES ($noheb,
+                    '$user',
+                   '$datedebsem',
+                   $noheb, 
+                   '$montantarrhes', 
+                   '$dateresa', 
+                   NULL, 
+                   $montantarrhes, 
+                   $nbOccupant, 
+                   $tarifsemresa)";
+
+echo $sql;
+    // Exécuter la requête SQL d'insertion
+    $results = mysqli_query($idc, $sql);
+
+    // Vérifier le résultat de l'insertion
+    if ($results) {
+        echo "Réservation effectuée avec succès !";
+    } else {
+        echo "Échec de l'insertion de la réservation : " . mysqli_error($idc);
+    }
+}
+
+?>
     <footer>
         <p>&copy; 2023 Agence de Locations d'Appartement</p>
     </footer>

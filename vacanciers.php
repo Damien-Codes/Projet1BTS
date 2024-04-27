@@ -50,32 +50,6 @@ if(isset($_SESSION["user"]) == False)
             <p>Relaxez-vous sur la plage dans notre bungalow en bord de mer. Plage de sable fin, eau turquoise, et couchers de soleil à couper le souffle vous garantissent des vacances paradisiaques.</p>
         </div>
     </div>
-
-    <form action="" method="Get">
-        <input type="search" name="terme" placeholder="Recherche...">
-        <input type="submit" name="s" value="Rechercher">
-    </form>
-
-    <?php
-    include("bdd.php");
-
-    
-    $query = "SELECT * FROM hebergement WHERE `NOMHEB` LIKE ?";
-    $result = mysqli_query($idc, $query);
-
-
-    if ($result->num_rows == 0) {
-        echo "<p>Aucun résultat trouvé</p>";
-    } else {
-        while ($result = $result->fetch_assoc()) {
-            echo "<p>" . $row["NOMHEB"] . "</p>";
-        }
-    }
-
-
-    mysqli_close($idc);
-?>
-
     <footer>
         <p>&copy; 2023 Agence de Locations d'Appartement</p>
     </footer>
