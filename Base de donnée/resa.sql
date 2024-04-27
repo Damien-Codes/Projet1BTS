@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 08, 2024 at 08:25 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Apr 27, 2024 at 04:12 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compte` (
-  `USER` char(8) NOT NULL,
-  `MDP` char(10) DEFAULT NULL,
-  `NOMCPTE` char(40) DEFAULT NULL,
-  `PRENOMCPTE` char(30) DEFAULT NULL,
+  `USER` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `MDP` char(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NOMCPTE` char(40) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `PRENOMCPTE` char(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `DATEINSCRIP` date DEFAULT NULL,
   `DATEFERME` date DEFAULT NULL,
-  `TYPECOMPTE` char(3) DEFAULT NULL,
-  `ADRMAILCPTE` char(60) DEFAULT NULL,
-  `NOTELCPTE` char(15) DEFAULT NULL,
-  `NOPORTCPTE` char(15) DEFAULT NULL
+  `TYPECOMPTE` char(3) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ADRMAILCPTE` char(60) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NOTELCPTE` char(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NOPORTCPTE` char(15) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -56,8 +56,8 @@ INSERT INTO `compte` (`USER`, `MDP`, `NOMCPTE`, `PRENOMCPTE`, `DATEINSCRIP`, `DA
 --
 
 CREATE TABLE `etat_resa` (
-  `CODEETATRESA` char(2) NOT NULL,
-  `NOMETATRESA` char(15) DEFAULT NULL
+  `CODEETATRESA` char(2) COLLATE utf8mb4_general_ci NOT NULL,
+  `NOMETATRESA` char(15) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -65,8 +65,12 @@ CREATE TABLE `etat_resa` (
 --
 
 INSERT INTO `etat_resa` (`CODEETATRESA`, `NOMETATRESA`) VALUES
-('1', 'Disponible'),
-('2', 'Indisponible');
+('AN', 'Annulée'),
+('AV', 'Arrhes versées'),
+('BL', 'Bloquée'),
+('CR', 'Clés retirées'),
+('SL', 'Solde'),
+('TE', 'Terminée');
 
 -- --------------------------------------------------------
 
@@ -75,18 +79,18 @@ INSERT INTO `etat_resa` (`CODEETATRESA`, `NOMETATRESA`) VALUES
 --
 
 CREATE TABLE `hebergement` (
-  `NOHEB` int(4) NOT NULL,
-  `CODETYPEHEB` char(5) NOT NULL,
-  `NOMHEB` char(40) DEFAULT NULL,
-  `NBPLACEHEB` int(2) DEFAULT NULL,
-  `SURFACEHEB` int(3) DEFAULT NULL,
+  `NOHEB` int NOT NULL,
+  `CODETYPEHEB` char(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `NOMHEB` char(40) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NBPLACEHEB` int DEFAULT NULL,
+  `SURFACEHEB` int DEFAULT NULL,
   `INTERNET` tinyint(1) DEFAULT NULL,
-  `ANNEEHEB` int(4) DEFAULT NULL,
-  `SECTEURHEB` char(15) DEFAULT NULL,
-  `ORIENTATIONHEB` char(5) DEFAULT NULL,
-  `ETATHEB` char(32) DEFAULT NULL,
-  `DESCRIHEB` char(200) DEFAULT NULL,
-  `PHOTOHEB` char(50) DEFAULT NULL,
+  `ANNEEHEB` int DEFAULT NULL,
+  `SECTEURHEB` char(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ORIENTATIONHEB` char(5) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ETATHEB` char(32) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `DESCRIHEB` char(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `PHOTOHEB` char(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `TARIFSEMHEB` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -95,11 +99,7 @@ CREATE TABLE `hebergement` (
 --
 
 INSERT INTO `hebergement` (`NOHEB`, `CODETYPEHEB`, `NOMHEB`, `NBPLACEHEB`, `SURFACEHEB`, `INTERNET`, `ANNEEHEB`, `SECTEURHEB`, `ORIENTATIONHEB`, `ETATHEB`, `DESCRIHEB`, `PHOTOHEB`, `TARIFSEMHEB`) VALUES
-(1, '3', 'Marie Mozette', 14, 141, 0, 2019, 'Esonne', 'Nord', 'Disponible', 'Chalet très important 3 place 2 piscine et un spas 12', '6526cdec0e31c.jpg', 1.00),
-(6, '4', 'Chalet', 4, 50, 1, 2023, 'Paris', 'SUD', 'Disponible', 'CAHALET A PARIS', '656a1c31e253a.png', 200.98),
-(53, '4', 'Chalet', 4, 46, 1, 4, 'Nord-Pas-de-Cal', 'Nord', 'Disponible', 'Chalet du Nord-Pas-de-Calais', '656a4e1d33103.png', 600.00),
-(98, '1', 'Appartement', 30, 80, 1, 30, 'Nord-Pas-de-Cal', 'Est', 'Disponible', 'Appartement du Nord-Pas-de-Calais', '656a4eb12d152.png', 500.00),
-(471, '1', '471', 471, 471, 1, 471, '471', '471', '471', '471', '65185355ef4a9.jpg', 471.00);
+(1, '4', 'Petit Chalet', 2, 12, NULL, 15, 'Paris', 'Sud', 'AN', 'Petit Chalet', NULL, '122.00');
 
 -- --------------------------------------------------------
 
@@ -108,17 +108,24 @@ INSERT INTO `hebergement` (`NOHEB`, `CODETYPEHEB`, `NOMHEB`, `NBPLACEHEB`, `SURF
 --
 
 CREATE TABLE `resa` (
-  `NORESA` int(5) NOT NULL,
-  `USER` char(8) NOT NULL,
+  `NORESA` int NOT NULL,
+  `USER` char(8) COLLATE utf8mb4_general_ci NOT NULL,
   `DATEDEBSEM` date NOT NULL,
-  `NOHEB` int(4) NOT NULL,
-  `CODEETATRESA` char(2) NOT NULL,
+  `NOHEB` int NOT NULL,
+  `CODEETATRESA` char(2) COLLATE utf8mb4_general_ci NOT NULL,
   `DATERESA` date DEFAULT NULL,
   `DATEARRHES` date DEFAULT NULL,
   `MONTANTARRHES` decimal(7,2) DEFAULT NULL,
-  `NBOCCUPANT` int(2) DEFAULT NULL,
+  `NBOCCUPANT` int DEFAULT NULL,
   `TARIFSEMRESA` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resa`
+--
+
+INSERT INTO `resa` (`NORESA`, `USER`, `DATEDEBSEM`, `NOHEB`, `CODEETATRESA`, `DATERESA`, `DATEARRHES`, `MONTANTARRHES`, `NBOCCUPANT`, `TARIFSEMRESA`) VALUES
+(25, 'vac', '2023-12-23', 1, 'AN', '2024-04-27', NULL, '122.00', 2, '122.00');
 
 -- --------------------------------------------------------
 
@@ -160,8 +167,8 @@ INSERT INTO `semaine` (`DATEDEBSEM`, `DATEFINSEM`) VALUES
 --
 
 CREATE TABLE `type_heb` (
-  `CODETYPEHEB` char(5) NOT NULL,
-  `NOMTYPEHEB` char(30) DEFAULT NULL
+  `CODETYPEHEB` char(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `NOMTYPEHEB` char(30) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -172,8 +179,7 @@ INSERT INTO `type_heb` (`CODETYPEHEB`, `NOMTYPEHEB`) VALUES
 ('1', 'Appartement'),
 ('2', 'Bungalow'),
 ('3', 'Mobil Home'),
-('4', 'Chalet'),
-('5', 'Autres');
+('4', 'Chalet');
 
 --
 -- Indexes for dumped tables
@@ -219,6 +225,16 @@ ALTER TABLE `semaine`
 --
 ALTER TABLE `type_heb`
   ADD PRIMARY KEY (`CODETYPEHEB`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `resa`
+--
+ALTER TABLE `resa`
+  MODIFY `NORESA` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
